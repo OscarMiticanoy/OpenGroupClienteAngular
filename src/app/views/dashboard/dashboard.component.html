@@ -1,0 +1,35 @@
+<h1>Listado de Pedidos</h1>
+
+
+<div class="container mat-elevation-z8">
+
+  <button type="button" (click)="nuevo()" class="btn btn-secondary">Nuevo Pedido</button>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>cliente</th>
+        <th>producto</th>
+        <th>precio</th>
+        <th>cantidad</th>
+        <th>total</th>
+        <th>editar/borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataSource">
+        <td>{{ data.pedido_Id }}</td>
+        <td>{{ data.cliente }}</td>
+        <td>{{ data.producto }}</td>
+        <td>{{ data.precio }}</td>
+        <td>{{ data.cantidad }}</td>
+        <td>{{ data.total }}</td>
+        <td>
+          <button class="btn"><i class="material-icons" (click)="editPedido(course)">edit</i></button>
+          <button class="btn"><i class="material-icons" (click)="deletePedido(course)">delete</i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

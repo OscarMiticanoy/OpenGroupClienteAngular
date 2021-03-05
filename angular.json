@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "OpenGroupClienteAngular"
+    }
+  },
+  "defaultProject": "OpenGroupClienteAngular",
+  "cli": {
+    "analytics": "377a5578-a03f-4806-ba31-04aea5e5d5e6"
+  }
 }
