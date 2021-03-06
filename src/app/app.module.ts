@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { DataTablesModule } from "angular-datatables";
 
@@ -29,7 +31,9 @@ import { DataTablesModule } from "angular-datatables";
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
-    DataTablesModule
+    DataTablesModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

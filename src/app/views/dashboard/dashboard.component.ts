@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor( private api:ApiServiceService, private router:Router ) { }
 
   ngOnInit(): void {
-    //this.displayedColumns = this.columnNames.map(x => x.id);
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2

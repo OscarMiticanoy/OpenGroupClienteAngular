@@ -1,1 +1,20 @@
-<p>nuevo works!</p>
+<p class="h4 mb-4">Nuevo Pedido</p>
+<form class="text-center border border-light p-5" >
+    <div class="form-group">
+        <label for="power">Categorias</label>
+        <select class="form-control" id="categoria" required [ngModel]="selectedDevicecategory" (ngModelChange)="onChangeCategory($event)" name="selCat">
+            <option *ngFor="let categoria of categorias; let i = index" value={{i}}>{{categoria.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="form-group" *ngIf="selectedCategory">
+        <label for="power">Productos</label>
+        <select class="form-control" id="producto" required [ngModel]="selectedDeviceProducto" (ngModelChange)="onChangeProducto($event)" name="selPro">
+            <option *ngFor="let producto of mostrarSeleccion; let i = index" value={{i}}>{{producto.nombre}}</option>
+        </select>
+    </div>
+    <input type="number" (change)="onChangeCantidad()" [(ngModel)]="cantidadValue" name="first" class="form-control mb-4" placeholder="cantidad" required min="0" max="20">
+    <h2>Valor Producto: <span>{{valorProducto}}</span></h2>
+    <h2>Valor Total: <span>{{valorTotal}}</span></h2>
+    <button type="submit" (click)="agregar()" class="btn btn-secondary">Agregar</button>
+</form>

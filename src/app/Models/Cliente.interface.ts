@@ -1,4 +1,4 @@
-import { IPedido } from "./IPedidos.interface";
+import { IPedido } from "./IPedido";
 
 
 export interface IClientes{
