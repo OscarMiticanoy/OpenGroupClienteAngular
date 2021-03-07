@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { ApiServiceService } from '../../service/api-service.service';
 import { IPedidoR } from '../../Models/IPedidoR.interface';
 import { Subject } from 'rxjs';
-import { IPedido } from '../../Models/IPedido';
 import { Router } from '@angular/router';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,12 +16,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   dataSource: IPedidoR[];
-  displayedColumns: string[] = ['pedido_Id', 'cliente', 'producto', 'precio', 'cantidad', 'total'];
   isProcessing = true;
   updatedPedido: IPedidoR[];
+  addcantidad: number;
+  closeResult = '';
 
 
-  constructor( private api:ApiServiceService, private router:Router ) { }
+  constructor( private api:ApiServiceService, private router:Router, private modalService: NgbModal ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -34,17 +35,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  open(pedido: IPedidoR, content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(pedido, reason)}`;
+    });
+    
+  }
+
+  private getDismissReason(pedido: IPedidoR, reason: any): string {
+
+    let updateCantidad = pedido.cantidad+this.addcantidad;
+    this.api.actualizarPedido(pedido.pedido_Id, updateCantidad).subscribe(data =>{
+      this.updatedPedido = data;
+    });
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   nuevo(){
     this.router.navigate(['nuevo']);
   }
 
-  editCourse(pedido: IPedidoR) {
-    this.api.actualizarPedido(pedido.pedido_Id, pedido.cantidad).subscribe(data =>{
-      this.updatedPedido = data;
-    });
-  }
-
-  deleteCourse(pedido: IPedidoR) {
+  deletePedido(pedido: IPedidoR) {
     this.api.borrarPedido( pedido.pedido_Id);
   }
   

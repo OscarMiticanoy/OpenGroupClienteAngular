@@ -1,6 +1,5 @@
 <h1>Listado de Pedidos</h1>
 
-
 <div class="container mat-elevation-z8">
 
   <button type="button" (click)="nuevo()" class="btn btn-secondary">Nuevo Pedido</button>
@@ -25,11 +24,27 @@
         <td>{{ data.cantidad }}</td>
         <td>{{ data.total }}</td>
         <td>
-          <button class="btn"><i class="material-icons" (click)="editPedido(course)">edit</i></button>
-          <button class="btn"><i class="material-icons" (click)="deletePedido(course)">delete</i></button>
+          <button class="btn"><i class="material-icons" (click)="open(data, content)">edit</i></button>
+          <button class="btn"><i class="material-icons" (click)="deletePedido(data)">delete</i></button>
         </td>
       </tr>
     </tbody>
   </table>
-  
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">la cantidad agregada se sumara a la actual</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label >ingrese la cantidad</label>
+      <input type="number" class="form-control" [(ngModel)]="addcantidad">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Update</button>
+    </div>
+  </ng-template>
+
 </div>

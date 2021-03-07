@@ -16,6 +16,5 @@ export class EditarComponent implements OnInit {
   }
 
 
-
  
 }
